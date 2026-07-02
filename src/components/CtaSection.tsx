@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
 import { ArrowUpRight, Mail, Clock, Shield, Users, Sparkles, MessageSquare } from 'lucide-react';
+import ContactModal from './ContactModal';
 
 export default function CtaSection() {
-  const [email, setEmail] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <section id="cta-section" className="relative w-full bg-[#050505] text-white py-24 lg:py-32 overflow-hidden z-20 border-t border-white/5">
+      
+      <ContactModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
       
       {/* ================= BACKGROUND LAYERS & CINEMATIC LIGHTING ================= */}
       
@@ -121,39 +124,27 @@ export default function CtaSection() {
           {/* Column 1: Join with Neyza (Span 4) */}
           <div className="lg:col-span-4 flex flex-col justify-center">
             <h3 className="text-xl sm:text-2xl font-extrabold font-display tracking-tight text-white uppercase">
-              JOIN WITH NEYZA
+              START A PROJECT
             </h3>
             <p className="mt-4 text-[#A8A8B3] text-sm leading-relaxed max-w-[340px]">
-              Subscribe for design inspiration, marketing insights, growth strategies, AI updates, and exclusive resources.
+              Ready to transform your brand? Fill out our contact form to discuss your goals, select required services, and see how we can help.
             </p>
           </div>
 
-          {/* Column 2: Premium Email Input Form (Span 4) */}
-          <div className="lg:col-span-4 flex flex-col justify-center">
-            <form onSubmit={(e) => e.preventDefault()} className="relative w-full">
-              <div className="relative flex items-center bg-[#0B0B14]/80 backdrop-blur-xl border border-white/8 rounded-full p-1.5 pl-5 focus-within:border-[#A855F7]/40 shadow-[inset_0_2px_4px_rgba(0,0,0,0.4)] transition-all duration-300">
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Enter your email"
-                  className="w-full bg-transparent border-none outline-none text-white text-sm placeholder-zinc-500 font-medium"
-                />
-                
-                {/* Arrow Submit Button */}
-                <button
-                  type="submit"
-                  className="w-10 h-10 rounded-full bg-gradient-to-r from-[#2563FF] to-[#A855F7] flex items-center justify-center text-white shadow-[0_0_15px_rgba(109,40,255,0.4)] hover:shadow-[0_0_22px_rgba(168,85,247,0.7)] hover:scale-105 transition-all duration-300 shrink-0"
-                >
-                  <ArrowUpRight className="w-5 h-5" />
-                </button>
+          {/* Column 2: Premium Contact Button (Span 4) */}
+          <div className="lg:col-span-4 flex flex-col justify-center items-start lg:items-center">
+            <button
+              onClick={() => setIsModalOpen(true)}
+              className="group relative flex items-center gap-3 px-8 py-4 rounded-full bg-gradient-to-r from-[#2563FF] to-[#A855F7] text-white font-bold tracking-wide shadow-[0_0_20px_rgba(109,40,255,0.4)] hover:shadow-[0_0_35px_rgba(109,40,255,0.7)] hover:scale-[1.03] transition-all duration-300"
+            >
+              <span>Fill Contact Form</span>
+              <div className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center group-hover:bg-white group-hover:text-black transition-colors duration-300">
+                <ArrowUpRight className="w-3.5 h-3.5" />
               </div>
-
-              {/* Disclaimer */}
-              <span className="block mt-4 text-[10.5px] leading-relaxed text-zinc-500 font-normal">
-                By subscribing you agree to our <a href="#" className="underline hover:text-zinc-400">Terms & Conditions</a> and <a href="#" className="underline hover:text-zinc-400">Privacy & Cookies Policy</a>.
-              </span>
-            </form>
+            </button>
+            <span className="block mt-4 text-[11px] leading-relaxed text-zinc-500 font-normal">
+              Takes less than 2 minutes to complete.
+            </span>
           </div>
 
           {/* Column 3: Premium WhatsApp Card (Span 4) */}
