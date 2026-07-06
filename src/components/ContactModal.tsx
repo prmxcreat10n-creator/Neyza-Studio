@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { X, Send } from 'lucide-react';
 
@@ -88,7 +89,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
   }
 };
 
-  return (
+  const modalContent = (
     <AnimatePresence>
       {isOpen && (
         <>
@@ -118,8 +119,9 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
 
               {/* Close Button */}
               <button
+                type="button"
                 onClick={onClose}
-                className="absolute top-6 right-6 p-2 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 transition-colors duration-200 z-10"
+                className="absolute top-4 right-4 sm:top-6 sm:right-6 p-2.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 transition-all duration-200 z-[60]"
               >
                 <X className="w-5 h-5 text-white" />
               </button>
@@ -188,15 +190,17 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                     <label className="text-sm font-semibold text-zinc-200 mb-4 block">Select Services*</label>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                       {servicesList.map((service) => (
-                        <label
+                        <button
                           key={service}
-                          className={`flex items-center gap-3 p-3 rounded-xl border cursor-pointer transition-all duration-300 select-none ${
+                          type="button"
+                          onClick={() => handleServiceToggle(service)}
+                          className={`flex items-center gap-3 p-3 rounded-xl border cursor-pointer transition-all duration-300 select-none text-left ${
                             formData.services.includes(service)
                               ? 'bg-[#A855F7]/10 border-[#A855F7]/40 text-white'
                               : 'bg-white/[0.02] border-white/5 text-zinc-400 hover:bg-white/[0.04] hover:border-white/10'
                           }`}
                         >
-                          <div className={`w-4 h-4 rounded-sm flex items-center justify-center border transition-colors ${
+                          <div className={`w-4 h-4 rounded-sm flex items-center justify-center border transition-colors shrink-0 ${
                             formData.services.includes(service)
                               ? 'bg-[#A855F7] border-[#A855F7]'
                               : 'bg-transparent border-zinc-600'
@@ -207,8 +211,8 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                               </svg>
                             )}
                           </div>
-                          <span className="text-sm font-medium">{service}</span>
-                        </label>
+                          <span className="text-sm font-medium leading-tight">{service}</span>
+                        </button>
                       ))}
                     </div>
                   </div>
@@ -244,4 +248,8 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
       )}
     </AnimatePresence>
   );
+
+  return typeof document !== 'undefined'
+    ? createPortal(modalContent, document.body)
+    : null;
 }
