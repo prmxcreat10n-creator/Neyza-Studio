@@ -198,8 +198,8 @@ export default function FooterSection() {
                 </div>
                 <div className="flex flex-col overflow-hidden">
                   <span className="text-[10px] font-bold text-[#A855F7] uppercase tracking-wider">Email</span>
-                  <a href="mailto:hello@neyza.in" className="text-sm font-semibold text-white truncate hover:underline">
-                    hello@neyza.in
+                  <a href="mailto:contact@neyza.xyz" className="text-sm font-semibold text-white truncate hover:underline">
+                    contact@neyza.xyz
                   </a>
                 </div>
               </div>
@@ -212,7 +212,7 @@ export default function FooterSection() {
                 <div className="flex flex-col">
                   <span className="text-[10px] font-bold text-[#2563FF] uppercase tracking-wider">Phone</span>
                   <span className="text-sm font-semibold text-white">
-                    +91 98765 43210
+                    +91 78579 90713
                   </span>
                 </div>
               </div>
