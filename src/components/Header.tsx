@@ -121,8 +121,9 @@ export default function Header() {
           {/* Mobile menu button */}
           <div className="md:hidden flex items-center">
             <button
+              type="button"
               onClick={() => setIsOpen(!isOpen)}
-              className="text-zinc-400 hover:text-white p-2 rounded-lg hover:bg-white/5 transition-colors"
+              className="text-zinc-400 hover:text-white p-2 rounded-lg hover:bg-white/5 transition-colors cursor-pointer"
             >
               {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
@@ -151,7 +152,7 @@ export default function Header() {
                     setActiveTab(item.label);
                     setIsOpen(false);
                   }}
-                  className={`block text-base font-medium py-2 border-l-2 pl-3 transition-colors ${
+                  className={`block text-base font-medium py-2 border-l-2 pl-3 transition-colors cursor-pointer ${
                     activeTab === item.label
                       ? 'text-white border-brand-purple bg-brand-purple/5'
                       : 'text-zinc-400 border-transparent hover:text-white'
@@ -163,7 +164,7 @@ export default function Header() {
               <div className="pt-4 border-t border-white/5 flex flex-col gap-4">
                 <a 
                   href="#cta-section" 
-                  className="text-base font-semibold text-zinc-300 hover:text-white py-2 pl-3"
+                  className="text-base font-semibold text-zinc-300 hover:text-white py-2 pl-3 cursor-pointer"
                   onClick={(e) => {
                     handleScroll(e, '#cta-section');
                     setIsOpen(false);
@@ -172,11 +173,12 @@ export default function Header() {
                   Let's Talk
                 </a>
                 <button 
+                  type="button"
                   onClick={(e) => {
                     handleScroll(e, '#pricing');
                     setIsOpen(false);
                   }}
-                  className="w-full bg-gradient-to-r from-brand-blue to-brand-purple text-white py-3 px-5 rounded-full font-semibold flex items-center justify-center gap-2 hover:opacity-90"
+                  className="w-full bg-gradient-to-r from-brand-blue to-brand-purple text-white py-3 px-5 rounded-full font-semibold flex items-center justify-center gap-2 hover:opacity-90 active:scale-95 transition-all cursor-pointer"
                 >
                   <span>Get Started</span>
                   <ArrowRight className="w-4 h-4" />
