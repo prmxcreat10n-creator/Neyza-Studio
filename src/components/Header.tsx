@@ -50,7 +50,7 @@ export default function Header() {
     <header className={`fixed top-0 left-0 right-0 w-full z-50 transition-all duration-300 border-b ${
       isScrolled 
         ? "border-white/10 bg-[#07070F]/75 backdrop-blur-md shadow-[0_10px_40px_rgba(0,0,0,0.7),inset_0_1px_0_rgba(255,255,255,0.06)]" 
-        : "border-white/[0.04] bg-[#07070F]/30 backdrop-blur-sm shadow-none"
+        : "border-white/[0.04] bg-[#030303]/60 backdrop-blur-lg shadow-none"
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className={`flex items-center justify-between transition-all duration-300 ${isScrolled ? 'h-16' : 'h-20'}`}>

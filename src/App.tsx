@@ -44,11 +44,13 @@ export default function App() {
       <main 
         className="relative flex-1 flex flex-col justify-center px-4 sm:px-6 lg:px-8 pt-32 pb-12 lg:pt-40 lg:pb-20 z-10 bg-cover bg-center bg-no-repeat"
         style={{ 
-          backgroundImage: 'linear-gradient(to bottom, rgba(5, 5, 5, 0.4), rgba(5, 5, 5, 0.6)), url("https://lh3.googleusercontent.com/d/1Sp0_6zs3QTrfTcJY61efNLiENqnFpdvG")' 
+          backgroundImage: 'url("https://lh3.googleusercontent.com/d/1Sp0_6zs3QTrfTcJY61efNLiENqnFpdvG")' 
         }}
       >
+        {/* Responsive dark overlay - darker on mobile */}
+        <div className="absolute inset-0 bg-black/80 sm:bg-black/60 md:bg-black/50 lg:bg-black/40 pointer-events-none" />
         
-        <div className="max-w-7xl mx-auto w-full flex flex-col justify-center relative">
+        <div className="max-w-7xl mx-auto w-full flex flex-col justify-center relative z-10">
           
           {/* Main Grid layout */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
