@@ -320,11 +320,11 @@ export default function ServicesSection() {
             </span>
 
             {/* Premium rounded gradient button */}
-            <button className="group mt-8 relative px-8 py-4 rounded-full bg-gradient-to-r from-[#2563FF] to-[#A855F7] text-white text-[15px] font-bold flex items-center gap-2.5 overflow-hidden shadow-[0_10px_30px_rgba(109,40,255,0.3)] hover:shadow-[0_15px_40px_rgba(168,85,247,0.5)] transition-all duration-300">
+            <a href="#cta-section" className="group mt-8 relative px-8 py-4 rounded-full bg-gradient-to-r from-[#2563FF] to-[#A855F7] text-white text-[15px] font-bold flex items-center gap-2.5 overflow-hidden shadow-[0_10px_30px_rgba(109,40,255,0.3)] hover:shadow-[0_15px_40px_rgba(168,85,247,0.5)] transition-all duration-300">
               <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               <span>Let's Build Your Brand</span>
               <ArrowUpRight className="w-4.5 h-4.5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-200" />
-            </button>
+            </a>
           </motion.div>
 
         </div>

@@ -137,11 +137,11 @@ export default function AboutSection() {
               </div>
 
               {/* Premium rounded CTA button next to it */}
-              <button className="group relative px-6 py-3.5 rounded-full bg-[#050505] border border-[#6D28FF]/30 text-white text-[14px] font-bold flex items-center gap-2 overflow-hidden hover:border-[#A855F7] shadow-[0_0_15px_rgba(109,40,255,0.15)] hover:shadow-[0_0_25px_rgba(168,85,247,0.35)] transition-all duration-300 shrink-0">
+              <a href="#cta-section" className="group relative px-6 py-3.5 rounded-full bg-[#050505] border border-[#6D28FF]/30 text-white text-[14px] font-bold flex items-center gap-2 overflow-hidden hover:border-[#A855F7] shadow-[0_0_15px_rgba(109,40,255,0.15)] hover:shadow-[0_0_25px_rgba(168,85,247,0.35)] transition-all duration-300 shrink-0">
                 <div className="absolute inset-0 bg-gradient-to-r from-[#2563FF]/10 to-[#A855F7]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 <span>Let's Build Together</span>
                 <ArrowRight className="w-4 h-4 text-[#A855F7] group-hover:translate-x-1.5 transition-transform duration-200" />
-              </button>
+              </a>
             </motion.div>
 
           </div>

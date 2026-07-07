@@ -12,6 +12,10 @@
   --color-brand-magenta: #ff007a;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background-color: #000000;
   color: #ffffff;

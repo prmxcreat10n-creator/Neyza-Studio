@@ -108,25 +108,58 @@ export default function App() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.45 }}
-                className="flex items-center gap-4 mt-12 pt-4 border-t border-white/5 max-w-sm sm:max-w-none"
+                className="flex flex-col sm:flex-row items-start sm:items-center gap-5 mt-14 pt-8 border-t border-white/5 max-w-sm sm:max-w-none relative"
               >
-                <div className="flex -space-x-3 overflow-hidden">
+                {/* Decorative glowing top border line */}
+                <div className="absolute top-0 left-0 w-32 h-[1px] bg-gradient-to-r from-[#2563FF] via-[#A855F7] to-transparent opacity-50" />
+                
+                <div className="flex -space-x-4 relative">
+                  {/* Subtle purple glow behind avatars */}
+                  <div className="absolute inset-0 bg-[#A855F7]/20 blur-xl rounded-full scale-110" />
+                  
                   {avatars.map((avatar, idx) => (
-                    <img
-                      key={idx}
-                      className="inline-block h-9 w-9 sm:h-10 sm:w-10 rounded-full ring-2 ring-black object-cover hover:translate-y-[-4px] transition-transform duration-200"
-                      src={avatar.src}
-                      alt={avatar.alt}
-                      referrerPolicy="no-referrer"
-                    />
+                    <div key={idx} className="relative z-10 rounded-full bg-[#0B0B14] p-[2px] bg-gradient-to-br from-white/20 to-white/5">
+                      <img
+                        className="inline-block h-10 w-10 sm:h-11 sm:w-11 rounded-full object-cover hover:translate-y-[-6px] transition-all duration-300 hover:shadow-[0_0_15px_rgba(168,85,247,0.5)] cursor-pointer"
+                        src={avatar.src}
+                        alt={avatar.alt}
+                        referrerPolicy="no-referrer"
+                      />
+                    </div>
                   ))}
+                  
+                  {/* Plus icon indicating more users */}
+                  <div className="relative z-10 rounded-full bg-[#0B0B14] p-[2px] bg-gradient-to-br from-white/20 to-white/5 cursor-pointer hover:translate-y-[-6px] transition-all duration-300">
+                    <div className="h-10 w-10 sm:h-11 sm:w-11 rounded-full bg-zinc-900 border border-white/10 flex items-center justify-center text-xs font-bold text-white shadow-[0_0_10px_rgba(0,0,0,0.5)]">
+                      100+
+                    </div>
+                  </div>
                 </div>
+
                 <div className="flex flex-col">
-                  <p className="text-[13px] sm:text-[14px] text-zinc-400 font-medium leading-tight">
-                    Trusted by <span className="text-white font-bold">100+ brands</span>
+                  {/* Star Ratings */}
+                  <div className="flex items-center gap-1 mb-1.5">
+                    <svg className="w-0 h-0 absolute">
+                      <defs>
+                        <linearGradient id="partialStar" x1="0%" y1="0%" x2="100%" y2="0%">
+                          <stop offset="20%" stopColor="#fbbf24" />
+                          <stop offset="20%" stopColor="#3f3f46" />
+                        </linearGradient>
+                      </defs>
+                    </svg>
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <svg key={star} className={`w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-400 drop-shadow-[0_0_6px_rgba(251,191,36,0.6)]`} fill={star === 5 ? "url(#partialStar)" : "currentColor"} viewBox="0 0 20 20">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                      </svg>
+                    ))}
+                    <span className="text-[12px] text-zinc-400 ml-1.5 font-medium">4.2/5</span>
+                  </div>
+                  
+                  <p className="text-[13px] sm:text-[14px] text-zinc-300 font-medium leading-tight">
+                    Trusted by <span className="text-white font-bold tracking-wide">100+ Brands</span>
                   </p>
-                  <p className="text-[11px] sm:text-[12px] text-zinc-500 font-normal leading-tight mt-0.5">
-                    across the globe
+                  <p className="text-[11px] sm:text-[12px] text-zinc-500 font-normal leading-tight mt-1">
+                    Driving real growth globally
                   </p>
                 </div>
               </motion.div>

@@ -27,16 +27,23 @@ export default function Header() {
     { label: 'Resources', href: '#blog-section' },
   ];
 
-  const handleScroll = (e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>, href: string) => {
+  const handleScroll = (e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>, href: string, isMobile: boolean = false) => {
     e.preventDefault();
-    if (href === '#root') {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else {
-      const element = document.querySelector(href);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+    if (isMobile) {
+      setIsOpen(false);
     }
+    
+    setTimeout(() => {
+      if (href === '#root') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        const element = document.querySelector(href);
+        if (element) {
+          const top = element.getBoundingClientRect().top + window.scrollY - 80; // offset for header
+          window.scrollTo({ top, behavior: 'smooth' });
+        }
+      }
+    }, isMobile ? 150 : 0);
   };
 
   return (
@@ -148,9 +155,8 @@ export default function Header() {
                   key={item.label}
                   href={item.href}
                   onClick={(e) => {
-                    handleScroll(e, item.href);
+                    handleScroll(e, item.href, true);
                     setActiveTab(item.label);
-                    setIsOpen(false);
                   }}
                   className={`block text-base font-medium py-2 border-l-2 pl-3 transition-colors cursor-pointer ${
                     activeTab === item.label
@@ -164,10 +170,9 @@ export default function Header() {
               <div className="pt-4 border-t border-white/5 flex flex-col gap-4">
                 <a 
                   href="#cta-section" 
-                  className="text-base font-semibold text-zinc-300 hover:text-white py-2 pl-3 cursor-pointer"
+                  className="text-base font-semibold text-zinc-300 hover:text-white py-2 pl-3 cursor-pointer block"
                   onClick={(e) => {
-                    handleScroll(e, '#cta-section');
-                    setIsOpen(false);
+                    handleScroll(e, '#cta-section', true);
                   }}
                 >
                   Let's Talk
@@ -175,8 +180,7 @@ export default function Header() {
                 <button 
                   type="button"
                   onClick={(e) => {
-                    handleScroll(e, '#pricing');
-                    setIsOpen(false);
+                    handleScroll(e, '#pricing', true);
                   }}
                   className="w-full bg-gradient-to-r from-brand-blue to-brand-purple text-white py-3 px-5 rounded-full font-semibold flex items-center justify-center gap-2 hover:opacity-90 active:scale-95 transition-all cursor-pointer"
                 >
