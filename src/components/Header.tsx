@@ -2,20 +2,23 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { ArrowRight, Menu, X } from 'lucide-react';
 import { NavItem } from '../types';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [activeTab, setActiveTab] = useState('Home');
   const [isScrolled, setIsScrolled] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const handleScrollState = () => {
+    const handleNavigationState = () => {
       setIsScrolled(window.scrollY > 20);
     };
-    window.addEventListener('scroll', handleScrollState, { passive: true });
+    window.addEventListener('scroll', handleNavigationState, { passive: true });
     // Run once initially to handle page reloads mid-scroll
-    handleScrollState();
-    return () => window.removeEventListener('scroll', handleScrollState);
+    handleNavigationState();
+    return () => window.removeEventListener('scroll', handleNavigationState);
   }, []);
 
   const navItems: NavItem[] = [
@@ -27,12 +30,30 @@ export default function Header() {
     { label: 'Resources', href: '#blog-section' },
   ];
 
-  const handleScroll = (e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>, href: string, isMobile: boolean = false) => {
+  const handleNavigation = (e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement | HTMLDivElement>, href: string, isMobile: boolean = false) => {
     e.preventDefault();
     if (isMobile) {
       setIsOpen(false);
     }
     
+    // If we're not on the home page, and trying to access an anchor link, redirect to home page first
+    if (location.pathname !== '/' && href.startsWith('#')) {
+      if (href === '#root') {
+        navigate('/');
+      } else {
+        navigate('/');
+        // Then scroll
+        setTimeout(() => {
+          const element = document.querySelector(href);
+          if (element) {
+            const top = element.getBoundingClientRect().top + window.scrollY - 80;
+            window.scrollTo({ top, behavior: 'smooth' });
+          }
+        }, 100);
+      }
+      return;
+    }
+
     setTimeout(() => {
       if (href === '#root') {
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -85,7 +106,7 @@ export default function Header() {
                 key={item.label}
                 href={item.href}
                 onClick={(e) => {
-                  handleScroll(e, item.href);
+                  handleNavigation(e, item.href);
                   setActiveTab(item.label);
                 }}
                 className="relative py-2 text-[14px] font-medium text-zinc-400 hover:text-white transition-colors duration-200 flex items-center gap-1 group/item"
@@ -108,14 +129,14 @@ export default function Header() {
           <div className="hidden md:flex items-center gap-6">
             <a 
               href="#cta-section" 
-              onClick={(e) => handleScroll(e, '#cta-section')}
+              onClick={(e) => handleNavigation(e, '#cta-section')}
               className="text-[14px] font-semibold text-zinc-300 hover:text-white transition-colors duration-200"
             >
               Let's Talk
             </a>
             
             <button 
-              onClick={(e) => handleScroll(e, '#pricing')}
+              onClick={(e) => handleNavigation(e, '#pricing')}
               className="relative group h-[44px] px-6 rounded-full flex items-center justify-center overflow-hidden select-none cursor-pointer transition-all duration-300 bg-[linear-gradient(135deg,#2563FF_0%,#6D28FF_50%,#A855F7_100%)] shadow-[0_0_0_1px_rgba(109,40,255,0.2),inset_0_2px_3px_rgba(255,255,255,0.3),0_10px_30px_rgba(37,99,255,0.4)] hover:shadow-[0_0_0_1px_rgba(168,85,247,0.4),inset_0_2px_4px_rgba(255,255,255,0.4),0_15px_45px_rgba(109,40,255,0.6)] hover:-translate-y-1 hover:scale-[1.02]"
             >
               {/* Inner glowing shadow ring */}
@@ -160,7 +181,7 @@ export default function Header() {
                   key={item.label}
                   href={item.href}
                   onClick={(e) => {
-                    handleScroll(e, item.href, true);
+                    handleNavigation(e, item.href, true);
                     setActiveTab(item.label);
                   }}
                   className={`block text-base font-medium py-2 border-l-2 pl-3 transition-colors cursor-pointer ${
@@ -177,7 +198,7 @@ export default function Header() {
                   href="#cta-section" 
                   className="text-base font-semibold text-zinc-300 hover:text-white py-2 pl-3 cursor-pointer block"
                   onClick={(e) => {
-                    handleScroll(e, '#cta-section', true);
+                    handleNavigation(e, '#cta-section', true);
                   }}
                 >
                   Let's Talk
@@ -185,7 +206,7 @@ export default function Header() {
                 <button 
                   type="button"
                   onClick={(e) => {
-                    handleScroll(e, '#pricing', true);
+                    handleNavigation(e, '#pricing', true);
                   }}
                   className="w-full bg-gradient-to-r from-brand-blue to-brand-purple text-white py-3 px-5 rounded-full font-semibold flex items-center justify-center gap-2 hover:opacity-90 active:scale-95 transition-all cursor-pointer"
                 >

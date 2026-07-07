@@ -1,11 +1,15 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { PenTool, Instagram, Target, Monitor, Video, Store, ArrowUpRight } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 export default function ServicesSection() {
+  const navigate = useNavigate();
+
   const services = [
     {
       num: "01",
+      slug: "brand-identity",
       title: "Brand Identity",
       desc: "Build memorable brands with premium logo design, visual identity, brand strategy, and complete brand systems.",
       icon: PenTool,
@@ -17,6 +21,7 @@ export default function ServicesSection() {
     },
     {
       num: "02",
+      slug: "social-media-management",
       title: "Social Media Management",
       desc: "Premium content strategy, content creation, account management, and consistent brand growth across every platform.",
       icon: Instagram,
@@ -28,6 +33,7 @@ export default function ServicesSection() {
     },
     {
       num: "03",
+      slug: "performance-marketing",
       title: "Performance Marketing",
       desc: "ROI-driven Meta Ads and Google Ads campaigns that generate qualified leads, sales, and measurable business growth.",
       icon: Target,
@@ -39,6 +45,7 @@ export default function ServicesSection() {
     },
     {
       num: "04",
+      slug: "website-development",
       title: "Website Design & Development",
       desc: "Modern websites designed to convert visitors into customers with premium UI, fast performance, and responsive experiences.",
       icon: Monitor,
@@ -50,6 +57,7 @@ export default function ServicesSection() {
     },
     {
       num: "05",
+      slug: "video-graphics",
       title: "Creative Content",
       desc: "High-quality graphics, reels, videos, ad creatives, motion graphics, and storytelling that elevates your brand.",
       icon: Video,
@@ -61,6 +69,7 @@ export default function ServicesSection() {
     },
     {
       num: "06",
+      slug: "google-business-profile",
       title: "Google Business Profile",
       desc: "Optimize your Google presence with complete GBP setup, local SEO, review management, and profile optimization.",
       icon: Store,
@@ -152,6 +161,10 @@ export default function ServicesSection() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: idx * 0.1, ease: "easeOut" }}
                   whileHover={{ y: -8, scale: 1.015 }}
+                  onClick={() => {
+                    navigate(`/services/${svc.slug}`);
+                    window.scrollTo(0, 0);
+                  }}
                   className="group relative rounded-[28px] overflow-hidden p-8 sm:p-10 flex flex-col justify-between h-[380px] bg-gradient-to-br from-[#4F46E5] via-[#6D28FF] to-[#A855F7] shadow-[0_30px_60px_rgba(109,40,255,0.35),inset_0_1px_1px_rgba(255,255,255,0.2)] border border-white/20 cursor-pointer"
                 >
                   {/* Subtle inner grid overlay */}
@@ -212,6 +225,10 @@ export default function ServicesSection() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: idx * 0.1, ease: "easeOut" }}
                 whileHover={{ y: -8, scale: 1.015 }}
+                onClick={() => {
+                  navigate(`/services/${svc.slug}`);
+                  window.scrollTo(0, 0);
+                }}
                 style={{ '--hover-color': svc.color } as React.CSSProperties}
                 className={`group relative rounded-[28px] p-8 sm:p-10 flex flex-col justify-between h-[380px] bg-[#07070F]/80 backdrop-blur-xl border border-white/[0.06] transition-all duration-500 cursor-pointer overflow-hidden ${svc.borderColor} hover:bg-[#090915]/95 hover:shadow-[0_30px_60px_rgba(0,0,0,0.85)]`}
               >
