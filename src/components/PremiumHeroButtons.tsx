@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { motion, useMotionValue, useSpring, AnimatePresence } from 'motion/react';
-import { ArrowRight, Play } from 'lucide-react';
+import { ArrowRight, Play, Sparkles } from 'lucide-react';
 
 let sharedAudioCtx: AudioContext | null = null;
 
@@ -93,25 +93,23 @@ export function PrimaryPremiumButton({ onClick }: PremiumButtonProps) {
       onMouseLeave={handleMouseLeave}
       onMouseEnter={playSubtleHoverSound}
       onClick={onClick}
-      className="group relative h-[62px] px-8 rounded-full flex items-center justify-between gap-6 overflow-hidden select-none cursor-pointer transition-all duration-300 border border-white/10"
+      className="group relative h-[60px] px-8 rounded-full flex items-center justify-between gap-6 overflow-hidden select-none cursor-pointer transition-all duration-300"
       // Normal lift and enhanced glow on hover
       whileHover={{ 
         y: -4,
-        boxShadow: "0 15px 45px rgba(108, 92, 231, 0.45), 0 0 25px rgba(47, 128, 255, 0.25)"
+        scale: 1.02,
+        boxShadow: "0 0 0 1px rgba(168, 85, 247, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.4), 0 15px 45px rgba(109, 40, 255, 0.6)"
       }}
       // Intrinsic style gradients
       style={{
-        background: "linear-gradient(135deg, #2F80FF 0%, #6C5CE7 50%, #B24DFF 100%)",
-        boxShadow: "0 10px 40px rgba(93, 66, 255, 0.35)",
+        background: "linear-gradient(135deg, #2563FF 0%, #6D28FF 50%, #A855F7 100%)",
+        boxShadow: "0 0 0 1px rgba(109, 40, 255, 0.2), inset 0 2px 3px rgba(255, 255, 255, 0.3), 0 10px 30px rgba(37, 99, 255, 0.4)",
         x: springX,
         y: springY,
       }}
     >
-      {/* Subtle top glossy overlay edge */}
-      <div className="absolute inset-x-0 top-0 h-[1.5px] bg-gradient-to-r from-white/30 via-white/15 to-transparent rounded-t-full pointer-events-none" />
-
-      {/* Gentle overall radial gloss glare */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(255,255,255,0.15)_0%,rgba(255,255,255,0)_60%)] pointer-events-none" />
+      {/* Inner glowing shadow ring */}
+      <div className="absolute inset-0 rounded-full shadow-[inset_0_0_20px_rgba(255,255,255,0.15)] pointer-events-none" />
 
       {/* Micro-interactive soft light sweep passing across */}
       <AnimatePresence>
@@ -121,17 +119,17 @@ export function PrimaryPremiumButton({ onClick }: PremiumButtonProps) {
             animate={{ left: '200%' }}
             exit={{ opacity: 0 }}
             transition={{ duration: 1.2, ease: "easeInOut" }}
-            className="absolute top-0 bottom-0 w-24 bg-gradient-to-r from-transparent via-white/25 to-transparent skew-x-12 pointer-events-none"
+            className="absolute top-0 bottom-0 w-24 bg-gradient-to-r from-transparent via-white/40 to-transparent skew-x-12 pointer-events-none z-0"
           />
         )}
       </AnimatePresence>
 
       {/* Button Text */}
-      <span className="relative z-10 text-white font-sans text-[15px] sm:text-[16px] font-bold tracking-tight">
+      <span className="relative z-10 text-white font-sans text-[16px] sm:text-[17px] font-semibold tracking-wide drop-shadow-sm">
         Let's Grow Together
       </span>
 
-      {/* Circular Capsule Icon on the right */}
+      {/* Circular Arrow Icon on the right */}
       <div className="relative z-10 flex items-center justify-center w-9 h-9 rounded-full bg-white/10 border border-white/20 transition-all duration-300 group-hover:bg-white/20 group-hover:scale-105">
         <ArrowRight className="w-4 h-4 text-white transition-transform duration-300 ease-out group-hover:translate-x-[6px]" />
       </div>

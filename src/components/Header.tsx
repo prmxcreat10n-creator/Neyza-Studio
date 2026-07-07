@@ -116,12 +116,17 @@ export default function Header() {
             
             <button 
               onClick={(e) => handleScroll(e, '#pricing')}
-              className="relative group px-5 py-2.5 rounded-full bg-gradient-to-r from-brand-blue to-brand-purple text-white text-[14px] font-semibold flex items-center gap-2 overflow-hidden hover:shadow-[0_0_20px_rgba(155,81,224,0.4)] transition-all duration-300"
+              className="relative group h-[44px] px-6 rounded-full flex items-center justify-center overflow-hidden select-none cursor-pointer transition-all duration-300 bg-[linear-gradient(135deg,#2563FF_0%,#6D28FF_50%,#A855F7_100%)] shadow-[0_0_0_1px_rgba(109,40,255,0.2),inset_0_2px_3px_rgba(255,255,255,0.3),0_10px_30px_rgba(37,99,255,0.4)] hover:shadow-[0_0_0_1px_rgba(168,85,247,0.4),inset_0_2px_4px_rgba(255,255,255,0.4),0_15px_45px_rgba(109,40,255,0.6)] hover:-translate-y-1 hover:scale-[1.02]"
             >
+              {/* Inner glowing shadow ring */}
+              <div className="absolute inset-0 rounded-full shadow-[inset_0_0_20px_rgba(255,255,255,0.15)] pointer-events-none" />
+              
               {/* Shimmer overlay */}
-              <div className="absolute inset-0 w-1/2 h-full bg-white/10 skew-x-12 translate-x-[-120%] group-hover:translate-x-[250%] transition-transform duration-1000" />
-              <span>Get Started</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
+              <div className="absolute inset-0 w-24 bg-gradient-to-r from-transparent via-white/40 to-transparent skew-x-12 -left-[120%] group-hover:left-[200%] transition-all duration-1000 ease-in-out z-0 pointer-events-none" />
+              
+              <span className="relative z-10 text-white font-sans text-[14px] font-semibold tracking-wide drop-shadow-sm">
+                Get Started
+              </span>
             </button>
           </div>
 

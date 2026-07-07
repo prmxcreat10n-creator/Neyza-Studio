@@ -48,7 +48,7 @@ export default function StatsColumn() {
       initial={{ opacity: 0, x: 40 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.8, ease: "easeOut" }}
-      className="w-full max-w-[345px] ml-auto relative rounded-[28px] border border-white/[0.06] bg-[#07070F]/85 backdrop-blur-[28px] p-6 sm:p-7 shadow-[0_30px_70px_rgba(0,0,0,0.9)] overflow-hidden group/card"
+      className="w-full max-w-[345px] ml-auto relative rounded-[28px] border border-white/[0.06] bg-[#07070F]/20 backdrop-blur-[28px] p-6 sm:p-7 shadow-[0_30px_70px_rgba(0,0,0,0.9)] overflow-hidden group/card"
     >
       {/* Subtle grid pattern for texture */}
       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.002)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.002)_1px,transparent_1px)] bg-[size:16px_16px] opacity-45 pointer-events-none rounded-[28px]" />
