@@ -13,6 +13,8 @@ import BlogSection from './components/BlogSection';
 import PricingSection from './components/PricingSection';
 import CtaSection from './components/CtaSection';
 import FooterSection from './components/FooterSection';
+import BackToTop from './components/BackToTop';
+import CursorGlow from './components/CursorGlow';
 import { PrimaryPremiumButton, SecondaryPremiumButton } from './components/PremiumHeroButtons';
 
 export default function App() {
@@ -170,6 +172,12 @@ export default function App() {
 
       {/* Premium Footer section */}
       <FooterSection />
+
+      {/* Back to top floating button */}
+      <BackToTop />
+      
+      {/* Custom Global Follow Cursor Glow */}
+      <CursorGlow />
     </div>
   );
 }

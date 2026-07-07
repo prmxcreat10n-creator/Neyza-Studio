@@ -2,6 +2,43 @@ import React, { useRef, useState, useEffect } from 'react';
 import { motion, useMotionValue, useSpring, AnimatePresence } from 'motion/react';
 import { ArrowRight, Play } from 'lucide-react';
 
+let sharedAudioCtx: AudioContext | null = null;
+
+const playSubtleHoverSound = () => {
+  try {
+    if (typeof window === 'undefined') return;
+    
+    if (!sharedAudioCtx) {
+      const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext;
+      if (!AudioContextClass) return;
+      sharedAudioCtx = new AudioContextClass();
+    }
+    
+    // Resume audio context if it was suspended (browser autoplay policy)
+    if (sharedAudioCtx.state === 'suspended') {
+      sharedAudioCtx.resume();
+    }
+
+    const oscillator = sharedAudioCtx.createOscillator();
+    const gainNode = sharedAudioCtx.createGain();
+
+    oscillator.type = 'sine';
+    oscillator.frequency.setValueAtTime(800, sharedAudioCtx.currentTime);
+    oscillator.frequency.exponentialRampToValueAtTime(300, sharedAudioCtx.currentTime + 0.05);
+
+    gainNode.gain.setValueAtTime(0.03, sharedAudioCtx.currentTime);
+    gainNode.gain.exponentialRampToValueAtTime(0.001, sharedAudioCtx.currentTime + 0.05);
+
+    oscillator.connect(gainNode);
+    gainNode.connect(sharedAudioCtx.destination);
+
+    oscillator.start();
+    oscillator.stop(sharedAudioCtx.currentTime + 0.05);
+  } catch (error) {
+    // Silently handle any audio errors
+  }
+};
+
 interface PremiumButtonProps {
   onClick: () => void;
 }
@@ -54,6 +91,7 @@ export function PrimaryPremiumButton({ onClick }: PremiumButtonProps) {
       ref={buttonRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
+      onMouseEnter={playSubtleHoverSound}
       onClick={onClick}
       className="group relative h-[62px] px-8 rounded-full flex items-center justify-between gap-6 overflow-hidden select-none cursor-pointer transition-all duration-300 border border-white/10"
       // Normal lift and enhanced glow on hover
@@ -135,6 +173,7 @@ export function SecondaryPremiumButton({ onClick }: PremiumButtonProps) {
       ref={buttonRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
+      onMouseEnter={playSubtleHoverSound}
       onClick={onClick}
       style={{
         x: springX,
